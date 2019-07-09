@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "94d4bf9ac7f4a933030e46a346ee2917",
+    "content-hash": "d05d4f941fbb96fbe9985911ba8139ea",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -836,6 +836,38 @@
                 "psr-3"
             ],
             "time": "2018-11-05T09:00:11+00:00"
+        },
+        {
+            "name": "nanosch/hexopia",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nanosch/hexopia.git",
+                "reference": "966c5c96d2729f5356affede313a701f1e144f58"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nanosch/hexopia/zipball/966c5c96d2729f5356affede313a701f1e144f58",
+                "reference": "966c5c96d2729f5356affede313a701f1e144f58",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Hexopia\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Nanosch Adams",
+                    "email": "adams@nanosch.de"
+                }
+            ],
+            "time": "2019-07-09T19:30:49+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -4643,7 +4675,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "nanosch/hexopia": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
