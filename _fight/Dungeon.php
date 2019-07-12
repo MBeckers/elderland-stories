@@ -2,7 +2,7 @@
 
 namespace Fight;
 
-use Characters\Character;
+use _units\Unit;
 use Hexopia\Hex\Types\HexEmpty;
 use Hexopia\Map\Map;
 
@@ -21,12 +21,12 @@ class Dungeon
         return $this->map;
     }
 
-    public function addCharacter(Character $character)
+    public function addCharacter(Unit $character)
     {
         $this->characters[$character->getId()] = $character;
     }
 
-    public function move(Character $character, int $direction) : bool
+    public function move(Unit $character, int $direction) : bool
     {
         $target = $character->getCurrentHex()->neighbor($direction);
 

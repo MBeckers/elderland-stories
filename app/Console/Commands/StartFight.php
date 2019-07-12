@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use Characters\Hero;
+use _units\Hero;
 use Fight\Dungeon;
 use Fight\Fight;
 use Hexopia\Map\ConsolePlotter\MapPlotter;

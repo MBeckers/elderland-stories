@@ -1,11 +1,11 @@
 <?php
 
-namespace Characters;
+namespace _units;
 
 use Hexopia\Hex\Types\HexHero;
 use Hexopia\Hex\Types\HexTypes;
 
-class Hero extends Character
+class Hero extends Unit
 {
     protected static function getHexType(): HexTypes
     {
