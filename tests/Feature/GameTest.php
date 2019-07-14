@@ -2,9 +2,10 @@
 
 namespace Tests\Feature;
 
-use Fight\Turn;
 use Tests\TestCase;
-use World\Game;
+use Game\Game;
+
+use Hexopia\Map\ConsolePlotter\MapPlotter;
 
 class GameTest extends TestCase
 {
@@ -27,9 +28,13 @@ class GameTest extends TestCase
         $game = Game::new();
 
         $this->assertEquals(Game::class, get_class($game));
-            $this->assertEquals(World::class, get_class($game->world));
-                $this->assertIsArray($game->world->maps);
-                $this->assertIsArray($game->world->dungeons);
+              
+
+        $this->assertEquals(World::class, get_class($game->world));
+             $this->assertIsArray($game->maps);
+             MapPlotter::draw($game->maps['Elderland'])->plot();
+                
+            $this->assertIsArray($game->world->dungeons);
 
             $this->assertIsArray($game->units);
             $this->assertIsArray($game->history);

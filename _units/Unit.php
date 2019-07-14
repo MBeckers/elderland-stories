@@ -1,6 +1,6 @@
 <?php
 
-namespace _units;
+namespace Units;
 
 use Hexopia\Hex\Types\HexTypes;
 use Hexopia\Map\Shapes\HexMap;

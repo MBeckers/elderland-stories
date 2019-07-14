@@ -14,7 +14,7 @@ class MapGenerator
 
     public static function createElderland()
     {
-        $elderland =  Elderland::hex(5);
+        $elderland = Elderland::hex(5);
 
         $elderTree = new Hex(0, 0, new HexElderTree());
 

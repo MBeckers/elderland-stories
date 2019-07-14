@@ -2,9 +2,11 @@
 
 namespace Game;
 
-use _units\Hero;
+use Units\Hero;
+use Units\Ork;
 use Fight\Dungeon;
 use Fight\Fight;
+use World\MapGenerator;
 use Hexopia\Map\Shapes\HexMap;
 use Illuminate\Support\Facades\Session;
 
@@ -34,7 +36,7 @@ final class Game
 
         $game->units[] = new Ork();
 
-        $map->placeUnits()
+        $map->placeUnits($game->units);
 
         return $game;
     }

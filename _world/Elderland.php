@@ -2,7 +2,7 @@
 
 namespace World;
 
-use _units\Unit;
+use Units\Unit;
 use Hexopia\Hex\Helpers\HexArr;
 use Hexopia\Hex\Hex;
 use Hexopia\Hex\Types\HexHero;
@@ -29,7 +29,10 @@ class Elderland extends HexMap
 
     public function place(Hex $replacement)
     {
+
+
         if (HexArr::search($replacement, $this->unitPositions) !== false) {
+                    dd($replacement, $this->unitPositions);
             throw new \Exception('Cannot overwrite a units hex');
         }
 
@@ -44,17 +47,20 @@ class Elderland extends HexMap
 
         $hex = new Hex($placement->q, $placement->r, new HexHero());
 
-        $this->unitPositions[$unit->getId()] = $hex;
-
         $this->place($hex);
+        
+        $this->unitPositions[$unit->getId()] = $hex;
     }
 
     protected function findAppropriatePlacement()
     {
         $must = null;
         $should = null;
+        
+        $hexagons = $this->hexagons;
+        shuffle($hexagons);
 
-        foreach (shuffle($this->hexagons) as $candidate) {
+        foreach ($hexagons as $candidate) {
 
             if ($candidate->type->value != HexTypes::EMPTY) {
                 continue;

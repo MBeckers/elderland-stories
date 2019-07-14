@@ -35,7 +35,8 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "Characters\\": "_characters/",
+            "Game\\": "_game/",
+            "Units\\": "_units/",
             "World\\": "_world/",
             "Fight\\": "_fight/"
         },

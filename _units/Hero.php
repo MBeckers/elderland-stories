@@ -1,6 +1,6 @@
 <?php
 
-namespace _units;
+namespace Units;
 
 use Hexopia\Hex\Types\HexHero;
 use Hexopia\Hex\Types\HexTypes;
