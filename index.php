@@ -2,6 +2,6 @@
 
 require __DIR__.'/vendor/autoload.php';
 
-$renderer = new \Foundation\ConsoleRenderer();
+$game = new \Foundation\Game();
 
-$renderer->plot();
+$game->loop();

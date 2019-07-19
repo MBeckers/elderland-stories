@@ -2,10 +2,23 @@
 
 namespace Foundation;
 
+use World\Elderland;
+
 class Game
 {
+    const MS_PER_UPDATE = 1000;
     private $started = true;
-    const MS_PER_UPDATE = 16;
+
+    private $renderer;
+    private $map;
+
+    public function __construct()
+    {
+        $this->map = Elderland::generate();
+        $this->renderer = new ConsoleRenderer(
+            $this->map
+        );
+    }
 
     public function loop() {
 
@@ -27,7 +40,9 @@ class Game
                 $lag -= self::MS_PER_UPDATE;
             }
 
-            // render();
+            sleep(self::MS_PER_UPDATE / 1000.0);
+
+            $this->renderer->plot();
         }
     }
 }

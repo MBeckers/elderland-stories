@@ -2,103 +2,76 @@
 
 namespace World;
 
-use Units\Unit;
-use Hexopia\Hex\Helpers\HexArr;
-use Hexopia\Hex\Hex;
-use Hexopia\Hex\Types\HexHero;
-use Hexopia\Hex\Types\HexTypes;
+use Hexopia\Contracts\MapGuard;
+use Hexopia\Map\MapField;
 use Hexopia\Map\Shapes\HexMap;
+use Hexopia\Objects\Obstacle;
 
 class Elderland extends HexMap
 {
-    protected $unitPositions;
-
-    public function __construct($radius = null)
+    public static function generate()
     {
-        parent::__construct($radius);
+        $map = static::hex(3);
 
-        $this->unitPositions = [];
+        $map->putAll(static::createObstacles());
+
+        return $map;
     }
 
-    public function placeUnits(array $units)
-    {
-        foreach($units as $unit) {
-            $this->placeUnit($unit);
-        }
-    }
+    private static function createObstacles() {
+        $obstacles[] = MapField::make(
+            1, -1, new Obstacle()
+        );
 
-    public function place(Hex $replacement)
-    {
+        $obstacles[] = MapField::make(
+            2, -1, new Obstacle()
+        );
 
+        $obstacles[] = MapField::make(
+            2, 0, new Obstacle()
+        );
 
-        if (HexArr::search($replacement, $this->unitPositions) !== false) {
-                    dd($replacement, $this->unitPositions);
-            throw new \Exception('Cannot overwrite a units hex');
-        }
+        $obstacles[] = MapField::make(
+            2, 1, new Obstacle()
+        );
 
-        return parent::place($replacement);
-    }
+        $obstacles[] = MapField::make(
+            1, 2, new Obstacle()
+        );
 
-    public function placeUnit(Unit $unit)
-    {
-        if(! $placement = $this->findAppropriatePlacement()) {
-            throw new Exception("Unit cannot be placed due to missing valid fields");
-        }
+        $obstacles[] = MapField::make(
+            0, 2, new Obstacle()
+        );
 
-        $hex = new Hex($placement->q, $placement->r, new HexHero());
+        $obstacles[] = MapField::make(
+            -1, 2, new Obstacle()
+        );
 
-        $this->place($hex);
-        
-        $this->unitPositions[$unit->getId()] = $hex;
-    }
+        $obstacles[] = MapField::make(
+            -1, 1, new Obstacle()
+        );
 
-    protected function findAppropriatePlacement()
-    {
-        $must = null;
-        $should = null;
-        
-        $hexagons = $this->hexagons;
-        shuffle($hexagons);
+        $obstacles[] = MapField::make(
+            -2, 1, new Obstacle()
+        );
 
-        foreach ($hexagons as $candidate) {
+        $obstacles[] = MapField::make(
+            -3, 2, new Obstacle()
+        );
 
-            if ($candidate->type->value != HexTypes::EMPTY) {
-                continue;
-            }
+        $obstacles[] = MapField::make(
+            -1, -1, new Obstacle()
+        );
 
-            $neighbors = $this->approachableNeighbors($candidate);
+        $obstacles[] = MapField::make(
+            0, -2, new Obstacle()
+        );
 
-            if (count($neighbors) == 0) {
-                continue;
-            }
+        $obstacles[] = MapField::make(
+            1, -3, new Obstacle()
+        );
 
-            $must = $candidate;
-
-            $enemies = array_filter($neighbors, function($neighbor){
-                return $neighbor->type->value != HexTypes::EMPTY;
-            });
-
-            if (count($enemies) == 0) {
-                $should = $candidate;
-            }
-
-            if (count($this->neighbors($candidate)) == 6 && count($enemies) == 0) {
-                return $candidate;
-            }
-        }
-
-        return $should ?? $must;
-    }
-
-    function __get($name)
-    {
-        if (property_exists(static::class, $name)) {
-            return $this->$name;
-        }
-
-        if (method_exists(static::class, $name)) {
-            return $this->$name();
-        }
+        return $obstacles;
     }
 }
 
