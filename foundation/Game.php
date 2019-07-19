@@ -18,7 +18,7 @@ class Game
     public function __construct()
     {
         $this->msPerUpdate = round(1000 / self::FPS);
-        $this->µsPerUpdate = round(1000*1000 / self::FPS);
+        $this->µsPerUpdate = $this->msPerUpdate * 1000;
 
         $this->map = Elderland::generate();
         $this->renderer = new ConsoleRenderer(
@@ -48,7 +48,7 @@ class Game
 
             $this->renderer->plot();
             
-            usleep( (microtime(true) - $current + $this->µsPerUpdate ));
+            usleep(abs(microtime(true) - $current + $this->µsPerUpdate ));
         }
     }
 }
