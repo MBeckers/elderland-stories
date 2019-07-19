@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nanosch/hexopia.git",
-                "reference": "bad5d35632f4f4c7dcb5359fcd5a80ea68ab8c01"
+                "reference": "7ed49641c5a76c947ffa18c22c8adf3275eb1834"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nanosch/hexopia/zipball/bad5d35632f4f4c7dcb5359fcd5a80ea68ab8c01",
-                "reference": "bad5d35632f4f4c7dcb5359fcd5a80ea68ab8c01",
+                "url": "https://api.github.com/repos/nanosch/hexopia/zipball/7ed49641c5a76c947ffa18c22c8adf3275eb1834",
+                "reference": "7ed49641c5a76c947ffa18c22c8adf3275eb1834",
                 "shasum": ""
             },
             "require": {
@@ -40,7 +40,7 @@
                     "email": "adams@nanosch.de"
                 }
             ],
-            "time": "2019-07-18T09:15:57+00:00"
+            "time": "2019-07-19T11:03:03+00:00"
         },
         {
             "name": "php-ds/php-ds",
