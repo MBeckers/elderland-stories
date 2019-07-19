@@ -6,7 +6,7 @@ use World\Elderland;
 
 class Game
 {
-    const FPS = 40;
+    const FPS = 20;
     private $µsPerUpdate;
     private $msPerUpdate;
     private $started = true;
@@ -45,12 +45,15 @@ class Game
 
                 $lag -= $this->µsPerUpdate;
             }
-
-            Debugger::putFps(
-                rand(10, 60)
-            );
+            if ($elapsed) {
+                Debugger::putFps(
+                    round(1/$elapsed)
+                );
+            }
 
             $this->renderer->plot();
+
+
 
             usleep(abs(microtime(true) - $current + $this->µsPerUpdate ));
         }
