@@ -29,8 +29,13 @@ class DebuggerFrame
             "FPS: " . Debugger::fps() . implode("", $this->display[0]), 0, ConsoleRenderer::MAP_WIDTH
         );
 
+        $updateMsLine = substr(
+            "Update in Ms: " . Debugger::updateMs() . implode("", $this->display[0]), 0, ConsoleRenderer::MAP_WIDTH
+        );
+
         $this->display[0] = str_split( $headline );
         $this->display[2] = str_split($fpsLine);
+        $this->display[3] = str_split($updateMsLine);
     }
 
     public function display()
