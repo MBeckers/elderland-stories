@@ -6,7 +6,7 @@ use World\Elderland;
 
 class Game
 {
-    const MS_PER_UPDATE = 1000;
+    const MS_PER_UPDATE = 16;
     private $started = true;
 
     private $renderer;
@@ -42,7 +42,7 @@ class Game
 
             $this->renderer->plot();
 
-            usleep(($current + self::MS_PER_UPDATE - (float) microtime()) * 10);
+            usleep(($current + self::MS_PER_UPDATE - (float) microtime()) * 1000);
         }
     }
 }
