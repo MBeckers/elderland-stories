@@ -6,7 +6,7 @@ use World\Elderland;
 
 class Game
 {
-    const FPS = 60;
+    const FPS = 40;
     private $µsPerUpdate;
     private $msPerUpdate;
 
@@ -28,11 +28,11 @@ class Game
 
     public function loop() {
 
-        $previous = (float) microtime();
+        $previous = microtime(true);
         $lag = 0.0;
 
         while ($this->started) {
-            $current = (float) microtime();
+            $current = microtime(true);
             $elapsed = $current - $previous;
             $previous = $current;
             $lag += $elapsed;
@@ -47,8 +47,8 @@ class Game
             }
 
             $this->renderer->plot();
-
-            usleep(($current + $this->µsPerUpdate - (float) microtime()) * 1000 * 1000);
+            
+            usleep( (microtime(true) - $current + $this->µsPerUpdate ));
         }
     }
 }
