@@ -5,7 +5,7 @@ namespace Foundation;
 class Debugger
 {
     protected static $_instance = null;
-    public $fps = 0;
+    public $fps;
 
     protected function __clone() {}
 
@@ -20,11 +20,16 @@ class Debugger
         return self::$_instance;
     }
     
+    public function setFps(int $fps)
+    {
+        $this->fps = $fps;
+    }
+    
     public static function putFps(int $fps)
     {
         $self = static::getInstance();
 
-        $self->fps = $fps;
+        $self->setFps($fps);
     }
 
     public static function fps()

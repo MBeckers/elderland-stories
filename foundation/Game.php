@@ -6,7 +6,9 @@ use World\Elderland;
 
 class Game
 {
-    const MS_PER_UPDATE = 16;
+    const FPS = 60;
+    private $µsPerUpdate;
+    private $msPerUpdate;
     private $started = true;
 
     private $renderer;
@@ -14,6 +16,9 @@ class Game
 
     public function __construct()
     {
+        $this->msPerUpdate = round(1000 / self::FPS);
+        $this->µsPerUpdate = round(1000 * 1000 / self::FPS);
+
         $this->map = Elderland::generate();
         $this->renderer = new ConsoleRenderer(
             $this->map
@@ -33,16 +38,20 @@ class Game
 
             // processInput();
 
-            while ($lag >= self::MS_PER_UPDATE)
+            while ($lag >= $this->µsPerUpdate)
             {
                 // update();
 
-                $lag -= self::MS_PER_UPDATE;
+                $lag -= $this->µsPerUpdate;
             }
+
+            Debugger::putFps(
+                rand(10, 60)
+            );
 
             $this->renderer->plot();
 
-            usleep(($current + self::MS_PER_UPDATE - (float) microtime()) * 1000);
+            sleep(1);
         }
     }
 }

@@ -17,7 +17,7 @@ class ConsoleRenderer
     protected $history;
     protected $debugger;
     protected $display;
-    
+
     public function __construct(HexMap $map)
     {
         $this->map = $map;
@@ -27,15 +27,15 @@ class ConsoleRenderer
         for ($i = 0; $i < $this->rows(); $i++) {
             $this->display[$i] = array_fill(0, $this->colums(), ' ');
         }
+    }
+
+    public function plot()
+    {
+        system('clear');
 
         $this->buildFrame();
         $this->buildMap();
         $this->buildDebugger();
-    }
-    
-    public function plot()
-    {
-        system('clear');
 
         foreach ($this->display as $line) {
             printf("%s" . PHP_EOL, implode("", $line));
