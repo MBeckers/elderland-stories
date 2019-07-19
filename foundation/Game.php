@@ -9,7 +9,6 @@ class Game
     const FPS = 40;
     private $µsPerUpdate;
     private $msPerUpdate;
-
     private $started = true;
 
     private $renderer;
@@ -19,6 +18,7 @@ class Game
     {
         $this->msPerUpdate = round(1000 / self::FPS);
         $this->µsPerUpdate = $this->msPerUpdate * 1000;
+
 
         $this->map = Elderland::generate();
         $this->renderer = new ConsoleRenderer(
@@ -46,8 +46,12 @@ class Game
                 $lag -= $this->µsPerUpdate;
             }
 
+            Debugger::putFps(
+                rand(10, 60)
+            );
+
             $this->renderer->plot();
-            
+
             usleep(abs(microtime(true) - $current + $this->µsPerUpdate ));
         }
     }

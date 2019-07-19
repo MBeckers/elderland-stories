@@ -3,11 +3,11 @@
 namespace Foundation\Frames;
 
 use Foundation\ConsoleRenderer;
+use Foundation\Debugger;
 
 class DebuggerFrame
 {
     protected $display;
-    protected $fps;
 
     public function __construct()
     {
@@ -18,7 +18,7 @@ class DebuggerFrame
         }
     }
 
-    public function render(int $fps)
+    public function render()
     {
         $headline = substr(
             "Debugger" .
@@ -26,7 +26,7 @@ class DebuggerFrame
         );
 
         $fpsLine = substr(
-            "FPS: " . $fps . implode("", $this->display[0]), 0, ConsoleRenderer::MAP_WIDTH
+            "FPS: " . Debugger::fps() . implode("", $this->display[0]), 0, ConsoleRenderer::MAP_WIDTH
         );
 
         $this->display[0] = str_split( $headline );

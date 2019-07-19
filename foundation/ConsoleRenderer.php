@@ -27,15 +27,15 @@ class ConsoleRenderer
         for ($i = 0; $i < $this->rows(); $i++) {
             $this->display[$i] = array_fill(0, $this->colums(), ' ');
         }
-
-        $this->buildFrame();
-        $this->buildMap();
-        $this->buildDebugger();
     }
 
     public function plot()
     {
         system('clear');
+
+        $this->buildFrame();
+        $this->buildMap();
+        $this->buildDebugger();
 
         foreach ($this->display as $line) {
             printf("%s" . PHP_EOL, implode("", $line));
