@@ -22,11 +22,11 @@ class Game
 
     public function loop() {
 
-        $previous = microtime();
+        $previous = (float) microtime();
         $lag = 0.0;
 
         while ($this->started) {
-            $current = microtime();
+            $current = (float) microtime();
             $elapsed = $current - $previous;
             $previous = $current;
             $lag += $elapsed;
@@ -40,9 +40,9 @@ class Game
                 $lag -= self::MS_PER_UPDATE;
             }
 
-            sleep(self::MS_PER_UPDATE / 1000.0);
-
             $this->renderer->plot();
+
+            usleep(($current + self::MS_PER_UPDATE - (float) microtime()) * 10);
         }
     }
 }
