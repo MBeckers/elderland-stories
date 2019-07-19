@@ -17,7 +17,7 @@ class ConsoleRenderer
     protected $history;
     protected $debugger;
     protected $display;
-    
+
     public function __construct(HexMap $map)
     {
         $this->map = $map;
@@ -32,7 +32,7 @@ class ConsoleRenderer
         $this->buildMap();
         $this->buildDebugger();
     }
-    
+
     public function plot()
     {
         system('clear');
