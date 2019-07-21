@@ -3,7 +3,6 @@
 namespace Foundation\Frames;
 
 use Foundation\ConsoleRenderer;
-use Foundation\Debugger;
 
 class HistoryFrame
 {
