@@ -3,8 +3,9 @@
 namespace Foundation\Input;
 
 use Foundation\Debugger;
+use \Foundation\Contracts\InputProcessor as InputProcessorInterface;
 
-class InputProcessor
+class InputProcessor implements InputProcessorInterface
 {
     public function process()
     {

@@ -2,8 +2,8 @@
 
 namespace Foundation;
 
-use Foundation\Input\InputProcessor;
-use World\Elderland;
+use Foundation\Contracts\InputProcessor;
+use Foundation\Contracts\ScreenRenderer;
 
 class GameLoop
 {
@@ -15,7 +15,7 @@ class GameLoop
     private $renderer;
     private $inputProcessor;
 
-    public function __construct(InputProcessor &$inputProcessor, ConsoleRenderer &$renderer)
+    public function __construct(InputProcessor &$inputProcessor, ScreenRenderer &$renderer)
     {
         $this->msPerUpdate = round(1000 / self::FPS);
         $this->µsPerUpdate = $this->msPerUpdate * 1000;

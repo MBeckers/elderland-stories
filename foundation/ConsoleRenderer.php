@@ -2,12 +2,13 @@
 
 namespace Foundation;
 
+use Foundation\Contracts\ScreenRenderer;
 use Foundation\Frames\DebuggerFrame;
 use Foundation\Frames\HistoryFrame;
 use Hexopia\Map\ConsolePlotter\Frames\HexFrame;
 use Hexopia\Map\Shapes\HexMap;
 
-class ConsoleRenderer
+class ConsoleRenderer implements ScreenRenderer
 {
     const MAP_WIDTH         = 53; // note 1 column padding left and right
     const MAP_HEIGHT        = 29;
