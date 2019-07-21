@@ -3,6 +3,7 @@
 namespace Foundation;
 
 use Foundation\Frames\DebuggerFrame;
+use Foundation\Frames\HistoryFrame;
 use Hexopia\Map\ConsolePlotter\Frames\HexFrame;
 use Hexopia\Map\Shapes\HexMap;
 
@@ -10,7 +11,7 @@ class ConsoleRenderer
 {
     const MAP_WIDTH         = 53; // note 1 column padding left and right
     const MAP_HEIGHT        = 29;
-    const HISTORY_WIDTH     = 41;
+    const HISTORY_WIDTH     = 47;
     const DEBUGGER_HEIGHT   = 10;
 
     protected $map;
@@ -31,14 +32,33 @@ class ConsoleRenderer
 
     public function plot()
     {
-        system('clear');
-
+        //system('clear');
+        print("\033[2J\033[;H");
         $this->buildFrame();
         $this->buildMap();
         $this->buildDebugger();
+        $this->buildHistory();
 
         foreach ($this->display as $line) {
             printf("%s" . PHP_EOL, implode("", $line));
+        }
+    }
+
+    protected function buildHistory()
+    {
+        $frame = new HistoryFrame();
+
+        $frame->render(60);
+
+        for ($row = 0;
+             $row < $this->rows() - 2;
+             $row++
+        ) {
+            for ($displayColumn = static::MAP_WIDTH + 2, $histoyColumn = 0; 
+                $histoyColumn < count($frame->display()[$row]); 
+                $displayColumn++, $histoyColumn++) {
+                $this->display[$row + 1][$displayColumn] = $frame->display()[$row][$histoyColumn];
+            }
         }
     }
 
