@@ -5,7 +5,7 @@ namespace Foundation;
 use Foundation\Input\InputProcessor;
 use World\Elderland;
 
-class Game
+class GameLoop
 {
     const FPS = 8;
     private $µsPerUpdate;
@@ -13,19 +13,15 @@ class Game
     private $started = true;
 
     private $renderer;
-    private $map;
     private $inputProcessor;
 
-    public function __construct()
+    public function __construct(InputProcessor &$inputProcessor, ConsoleRenderer &$renderer)
     {
         $this->msPerUpdate = round(1000 / self::FPS);
         $this->µsPerUpdate = $this->msPerUpdate * 1000;
 
-        $this->map = Elderland::generate();
-        $this->renderer = new ConsoleRenderer(
-            $this->map
-        );
-        $this->inputProcessor = new InputProcessor();
+        $this->inputProcessor = $inputProcessor;
+        $this->renderer = $renderer;
     }
 
     public function loop()

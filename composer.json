@@ -17,7 +17,8 @@
     "autoload": {
         "psr-4": {
             "Foundation\\": "foundation/",
-            "World\\": "_world/"
+            "World\\": "_world/",
+            "Game\\": "_game/"
         }
     },
     "autoload-dev": {

@@ -2,61 +2,35 @@
 
 namespace Game;
 
-use Units\Hero;
-use Units\Ork;
-use Fight\Dungeon;
-use Fight\Fight;
-use World\MapGenerator;
-use Hexopia\Map\Shapes\HexMap;
-use Illuminate\Support\Facades\Session;
+use Foundation\ConsoleRenderer;
+use Foundation\GameLoop;
+use Foundation\Input\InputProcessor;
+use World\Elderland;
 
 final class Game
 {
-    protected $id;
-    protected $currentScene;
-    protected $maps = [];
-    protected $dungeons = [];
-    protected $units = [];
-    protected $changelog = [];
+    private $map;
+    private $gameLoop;
+    private $renderer;
+    private $inputProcessor;
 
-    private function __construct($id)
+    private function __construct()
     {
-        $this->id = $id;
+        $this->map = Elderland::generate();
+
+        $this->renderer = new ConsoleRenderer( $this->map );
+
+        $this->inputProcessor = new InputProcessor();
+
+        $this->gameLoop = new GameLoop(
+            $this->inputProcessor, $this->renderer
+        );
     }
 
-    public static function new()
+    public static function start()
     {
-        $game = new self(1);
+        $game = new self();
 
-        list($mapName, $map) = MapGenerator::createElderland();
-
-        $game->maps[$mapName] = $map;
-
-        $game->units[] = new Hero();
-
-        $game->units[] = new Ork();
-
-        $map->placeUnits($game->units);
-
-        return $game;
-    }
-
-    public static function load()
-    {
-        return Session::get('game');
-    }
-
-    public function save()
-    {
-        Session::put('game', $this);
-    }
-
-    public function __get($name)
-    {
-        if (property_exists($this, $name)) {
-            return $this->$name;
-        }
-
-        throw new \ErrorException('Undefined property: ' . get_class($this) . '::$' . $name);
+        $game->gameLoop->loop();
     }
 }
