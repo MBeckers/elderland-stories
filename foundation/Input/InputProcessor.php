@@ -34,7 +34,7 @@ class InputProcessor implements InputProcessorInterface
 
         if($result === 0) return false;
 
-        $char = stream_get_line(STDIN, 1);
+        $char = stream_get_contents(STDIN, 1);
 
         return true;
     }
