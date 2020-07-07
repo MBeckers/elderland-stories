@@ -8,6 +8,6 @@
   },
   "author": "Nanosch Adams",
   "devDependencies": {
-    "electron": "^5.0.7"
+    "electron": "^7.2.4"
   }
 }
